@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Fire Truck / Engine SVG Path Simplified -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,70 L20,35 L40,35 L40,30 L75,30 L75,35 L85,35 L85,70 Z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M30,70 A5,5 0 1 0 40,70 A5,5 0 1 0 30,70 Z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M70,70 A5,5 0 1 0 80,70 A5,5 0 1 0 70,70 Z" />
+</vector>
