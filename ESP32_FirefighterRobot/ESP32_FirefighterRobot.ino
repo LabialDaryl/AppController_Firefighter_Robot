@@ -1,110 +1,162 @@
 /*
  * ESP32 Firefighter Robot Firmware
- *
- * Communication: WiFi (Access Point Mode)
- * Protocol: TCP Server on Port 80
- *
- * This firmware receives commands from the Android Controller app and
- * executes movement, nozzle aiming, and auxiliary functions.
- *
- * SECURITY: Limited to 1 concurrent connection to prevent command conflicts.
+ * Fixed: Compatible with ESP32 Arduino Core v3.x+ (new LEDC API)
  */
 
 #include <WiFi.h>
 
 // --- Configuration ---
-const char* ssid = "Firefighter_Robot_AP";
-const char* password = "password123"; // Min 8 characters
-const int port = 80;
+const char* ssid     = "Firefighter_Robot_AP";
+const char* password = "password123";
+const int   port     = 80;
 
 WiFiServer server(port);
 WiFiClient activeClient;
 bool isClientConnected = false;
 
 // --- Pin Definitions ---
-const int MOTOR_L_IN1 = 12;
-const int MOTOR_L_IN2 = 13;
-const int MOTOR_R_IN1 = 14;
-const int MOTOR_R_IN2 = 27;
-const int SERVO_PAN_PIN  = 25;
-const int SERVO_TILT_PIN = 26;
+const int MOTOR_IN1 = 12;
+const int MOTOR_IN2 = 13;
+const int MOTOR_IN3 = 14;
+const int MOTOR_IN4 = 27;
+const int MOTOR_ENA = 18;  // Left  PWM
+const int MOTOR_ENB = 19;  // Right PWM
+
 const int PUMP_PIN  = 33;
 const int LIGHT_PIN = 32;
 const int HORN_PIN  = 23;
 
+// --- PWM Settings (new API — no channel needed) ---
+const int LEDC_FREQ = 20000; // 20 kHz, above hearing range
+const int LEDC_RES  = 8;     // 8-bit → 0–255
+
+// --- Speed Settings ---
+int targetSpeedL  = 0;
+int targetSpeedR  = 0;
+int currentSpeedL = 0;
+int currentSpeedR = 0;
+const int MAX_SPEED  = 220;
+const int RAMP_STEP  = 15;
+const int RAMP_DELAY = 8;
+
+// -------------------------------------------------------
 void setup() {
   Serial.begin(115200);
   delay(1000);
   Serial.println("\n--- Firefighter Robot Starting ---");
 
-  pinMode(MOTOR_L_IN1, OUTPUT);
-  pinMode(MOTOR_L_IN2, OUTPUT);
-  pinMode(MOTOR_R_IN1, OUTPUT);
-  pinMode(MOTOR_R_IN2, OUTPUT);
+  // Direction pins
+  pinMode(MOTOR_IN1, OUTPUT);
+  pinMode(MOTOR_IN2, OUTPUT);
+  pinMode(MOTOR_IN3, OUTPUT);
+  pinMode(MOTOR_IN4, OUTPUT);
+
+  // ✅ New LEDC API for Core v3.x — attach pin directly, no channel number
+  ledcAttach(MOTOR_ENA, LEDC_FREQ, LEDC_RES);
+  ledcAttach(MOTOR_ENB, LEDC_FREQ, LEDC_RES);
+
   pinMode(PUMP_PIN,  OUTPUT);
   pinMode(LIGHT_PIN, OUTPUT);
   pinMode(HORN_PIN,  OUTPUT);
 
-  digitalWrite(PUMP_PIN, LOW);
-  digitalWrite(LIGHT_PIN, LOW);
-  digitalWrite(HORN_PIN, LOW);
   stopMotors();
 
-  Serial.print("Setting up Access Point...");
+  Serial.println("Configuring Access Point...");
   WiFi.softAP(ssid, password);
-
-  IPAddress IP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
-  Serial.println(IP);
+  Serial.println(WiFi.softAPIP());
 
   server.begin();
-  Serial.println("TCP Server started (Port 80)");
+  Serial.println("TCP Server started on port 80");
+  Serial.println("Waiting for controller...");
 }
 
+// -------------------------------------------------------
 void loop() {
-  // Check if a new client is trying to connect
   WiFiClient newClient = server.available();
-
   if (newClient) {
     if (!isClientConnected) {
-      // Accept first client
       activeClient = newClient;
       isClientConnected = true;
-      Serial.println(">>> New Controller Connected: " + activeClient.remoteIP().toString());
+      Serial.print(">>> Connected: ");
+      Serial.println(activeClient.remoteIP());
     } else {
-      // Reject any additional clients immediately
-      Serial.println("!!! Rejected connection attempt from: " + newClient.remoteIP().toString() + " (Session Busy)");
-      newClient.println("ERROR: Session Busy. Only one controller allowed.");
+      Serial.println("! Rejected extra connection");
       newClient.stop();
     }
   }
 
-  // Handle active client communication
   if (isClientConnected) {
     if (activeClient.connected()) {
       if (activeClient.available()) {
         String cmd = activeClient.readStringUntil('\n');
-        processCommand(cmd);
+        cmd.trim();
+        if (cmd.length() > 0) {
+          Serial.print("CMD: ["); Serial.print(cmd); Serial.println("]");
+          processCommand(cmd);
+        }
       }
+      rampSpeeds();
     } else {
-      // Client disconnected
-      Serial.println("<<< Controller Disconnected");
-      activeClient.stop();
+      Serial.println("<<< Disconnected");
       isClientConnected = false;
-      stopMotors(); // Safety: stop if disconnected
+      stopMotors();
     }
   }
 }
 
+// -------------------------------------------------------
+// ✅ New API: ledcWrite(pin, dutyCycle) — pin directly, no channel
+void applyPWM(int speedL, int speedR) {
+  ledcWrite(MOTOR_ENA, constrain(speedL, 0, 255));
+  ledcWrite(MOTOR_ENB, constrain(speedR, 0, 255));
+}
+
+void rampSpeeds() {
+  bool changed = false;
+
+  if (currentSpeedL < targetSpeedL)      { currentSpeedL = min(currentSpeedL + RAMP_STEP, targetSpeedL); changed = true; }
+  else if (currentSpeedL > targetSpeedL) { currentSpeedL = max(currentSpeedL - RAMP_STEP, targetSpeedL); changed = true; }
+
+  if (currentSpeedR < targetSpeedR)      { currentSpeedR = min(currentSpeedR + RAMP_STEP, targetSpeedR); changed = true; }
+  else if (currentSpeedR > targetSpeedR) { currentSpeedR = max(currentSpeedR - RAMP_STEP, targetSpeedR); changed = true; }
+
+  if (changed) {
+    applyPWM(currentSpeedL, currentSpeedR);
+    delay(RAMP_DELAY);
+  }
+}
+
+void setMotors(bool l_fwd, bool l_back, bool r_fwd, bool r_back, int spdL, int spdR) {
+  digitalWrite(MOTOR_IN1, l_fwd  ? HIGH : LOW);
+  digitalWrite(MOTOR_IN2, l_back ? HIGH : LOW);
+  digitalWrite(MOTOR_IN3, r_fwd  ? HIGH : LOW);
+  digitalWrite(MOTOR_IN4, r_back ? HIGH : LOW);
+  targetSpeedL = spdL;
+  targetSpeedR = spdR;
+}
+
+// -------------------------------------------------------
+void stopMotors() {
+  setMotors(0,0,0,0, 0, 0);
+  currentSpeedL = 0;
+  currentSpeedR = 0;
+  applyPWM(0, 0);
+  Serial.println("Motors: STOP");
+}
+
+void moveForward()       { setMotors(1,0,1,0, MAX_SPEED,   MAX_SPEED);   Serial.println("FWD"); }
+void moveBackward()      { setMotors(0,1,0,1, MAX_SPEED,   MAX_SPEED);   Serial.println("BWD"); }
+void turnLeft()          { setMotors(0,1,1,0, MAX_SPEED,   MAX_SPEED);   Serial.println("SPIN LEFT"); }
+void turnRight()         { setMotors(1,0,0,1, MAX_SPEED,   MAX_SPEED);   Serial.println("SPIN RIGHT"); }
+void moveForwardLeft()   { setMotors(1,0,1,0, MAX_SPEED/2, MAX_SPEED);   Serial.println("FWD-LEFT"); }
+void moveForwardRight()  { setMotors(1,0,1,0, MAX_SPEED,   MAX_SPEED/2); Serial.println("FWD-RIGHT"); }
+void moveBackwardLeft()  { setMotors(0,1,0,1, MAX_SPEED/2, MAX_SPEED);   Serial.println("BWD-LEFT"); }
+void moveBackwardRight() { setMotors(0,1,0,1, MAX_SPEED,   MAX_SPEED/2); Serial.println("BWD-RIGHT"); }
+
+// -------------------------------------------------------
 void processCommand(String cmd) {
-  cmd.trim();
-  if (cmd.length() == 0) return;
-
-  Serial.print("CMD: ");
-  Serial.println(cmd);
-
-  // --- Movement Commands ---
-  if (cmd == "F")       moveForward();
+  if      (cmd == "F")  moveForward();
   else if (cmd == "B")  moveBackward();
   else if (cmd == "L")  turnLeft();
   else if (cmd == "R")  turnRight();
@@ -114,88 +166,19 @@ void processCommand(String cmd) {
   else if (cmd == "BR") moveBackwardRight();
   else if (cmd == "S")  stopMotors();
 
-  // --- Nozzle Commands ---
-  else if (cmd == "NU")  Serial.println("Nozzle: UP");
-  else if (cmd == "ND")  Serial.println("Nozzle: DOWN");
-  else if (cmd == "NL")  Serial.println("Nozzle: LEFT");
-  else if (cmd == "NR")  Serial.println("Nozzle: RIGHT");
-  else if (cmd == "NC")  Serial.println("Nozzle: CENTERED");
+  else if (cmd == "PUMP_ON")   { digitalWrite(PUMP_PIN,  HIGH); Serial.println("Pump: ON"); }
+  else if (cmd == "PUMP_OFF")  { digitalWrite(PUMP_PIN,  LOW);  Serial.println("Pump: OFF"); }
+  else if (cmd == "LIGHT_ON")  { digitalWrite(LIGHT_PIN, HIGH); Serial.println("Light: ON"); }
+  else if (cmd == "LIGHT_OFF") { digitalWrite(LIGHT_PIN, LOW);  Serial.println("Light: OFF"); }
+  else if (cmd == "HORN_ON")   { digitalWrite(HORN_PIN,  HIGH); Serial.println("Horn: ON"); }
+  else if (cmd == "HORN_OFF")  { digitalWrite(HORN_PIN,  LOW);  Serial.println("Horn: OFF"); }
 
-  // --- Auxiliary Commands ---
-  else if (cmd == "PUMP_ON")   { digitalWrite(PUMP_PIN, HIGH); Serial.println("Pump: ON"); }
-  else if (cmd == "PUMP_OFF")  { digitalWrite(PUMP_PIN, LOW);  Serial.println("Pump: OFF"); }
-  else if (cmd == "LIGHT_ON")  { digitalWrite(LIGHT_PIN, HIGH); Serial.println("Lights: ON"); }
-  else if (cmd == "LIGHT_OFF") { digitalWrite(LIGHT_PIN, LOW);  Serial.println("Lights: OFF"); }
-  else if (cmd == "HORN_ON")   { digitalWrite(HORN_PIN, HIGH); Serial.println("Horn: ON"); }
-  else if (cmd == "HORN_OFF")  { digitalWrite(HORN_PIN, LOW);  Serial.println("Horn: OFF"); }
-  else if (cmd == "ESTOP")     { emergencyStop(); }
-}
+  else if (cmd == "ESTOP") {
+    stopMotors();
+    digitalWrite(PUMP_PIN, LOW);
+    digitalWrite(HORN_PIN, LOW);
+    Serial.println("!!! EMERGENCY STOP !!!");
+  }
 
-void stopMotors() {
-  digitalWrite(MOTOR_L_IN1, LOW);
-  digitalWrite(MOTOR_L_IN2, LOW);
-  digitalWrite(MOTOR_R_IN1, LOW);
-  digitalWrite(MOTOR_R_IN2, LOW);
-}
-
-void moveForward() {
-  digitalWrite(MOTOR_L_IN1, HIGH);
-  digitalWrite(MOTOR_L_IN2, LOW);
-  digitalWrite(MOTOR_R_IN1, HIGH);
-  digitalWrite(MOTOR_R_IN2, LOW);
-}
-
-void moveBackward() {
-  digitalWrite(MOTOR_L_IN1, LOW);
-  digitalWrite(MOTOR_L_IN2, HIGH);
-  digitalWrite(MOTOR_R_IN1, LOW);
-  digitalWrite(MOTOR_R_IN2, HIGH);
-}
-
-void turnLeft() {
-  digitalWrite(MOTOR_L_IN1, LOW);
-  digitalWrite(MOTOR_L_IN2, HIGH);
-  digitalWrite(MOTOR_R_IN1, HIGH);
-  digitalWrite(MOTOR_R_IN2, LOW);
-}
-
-void turnRight() {
-  digitalWrite(MOTOR_L_IN1, HIGH);
-  digitalWrite(MOTOR_L_IN2, LOW);
-  digitalWrite(MOTOR_R_IN1, LOW);
-  digitalWrite(MOTOR_R_IN2, HIGH);
-}
-
-void moveForwardLeft() {
-  digitalWrite(MOTOR_L_IN1, LOW);
-  digitalWrite(MOTOR_L_IN2, LOW);
-  digitalWrite(MOTOR_R_IN1, HIGH);
-  digitalWrite(MOTOR_R_IN2, LOW);
-}
-
-void moveForwardRight() {
-  digitalWrite(MOTOR_L_IN1, HIGH);
-  digitalWrite(MOTOR_L_IN2, LOW);
-  digitalWrite(MOTOR_R_IN1, LOW);
-  digitalWrite(MOTOR_R_IN2, LOW);
-}
-
-void moveBackwardLeft() {
-  digitalWrite(MOTOR_L_IN1, LOW);
-  digitalWrite(MOTOR_L_IN2, LOW);
-  digitalWrite(MOTOR_R_IN1, LOW);
-  digitalWrite(MOTOR_R_IN2, HIGH);
-}
-
-void moveBackwardRight() {
-  digitalWrite(MOTOR_L_IN1, LOW);
-  digitalWrite(MOTOR_L_IN2, HIGH);
-  digitalWrite(MOTOR_R_IN1, LOW);
-  digitalWrite(MOTOR_R_IN2, LOW);
-}
-
-void emergencyStop() {
-  stopMotors();
-  digitalWrite(PUMP_PIN, LOW);
-  Serial.println("!!! EMERGENCY STOP !!!");
+  else { Serial.print("Unknown CMD: "); Serial.println(cmd); }
 }
