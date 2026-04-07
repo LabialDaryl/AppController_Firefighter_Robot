@@ -2986,6 +2986,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable btn_arrow_selector
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3019,6 +3020,8 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable ic_toggle_auto
+drawable ic_toggle_manual
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3192,6 +3195,12 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnBackward
+id btnForward
+id btnNozzleDown
+id btnNozzleUp
+id btnTurnLeft
+id btnTurnRight
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3276,7 +3285,6 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
-id emergencyStopButton
 id end
 id endToStart
 id enterAlways
@@ -3337,6 +3345,7 @@ id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
+id labelSteerNoz
 id labeled
 id layout
 id left
@@ -3377,6 +3386,7 @@ id matrix
 id message
 id middle
 id mini
+id modeToggleButton
 id month_grid
 id month_navigation_bar
 id month_navigation_fragment_toggle
@@ -3384,7 +3394,6 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id motion_base
-id movementJoystick
 id movementPanel
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
@@ -3428,7 +3437,6 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
-id nozzleJoystick
 id nozzlePanel
 id off
 id on
@@ -3479,6 +3487,7 @@ id right
 id rightToLeft
 id right_icon
 id right_side
+id robotTitle
 id rounded
 id row_index_key
 id saveButton
@@ -3540,6 +3549,7 @@ id startVertical
 id staticLayout
 id staticPostLayout
 id statusBar
+id statusRightPanel
 id stop
 id stretch
 id submenuarrow
@@ -3866,6 +3876,10 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string clear_text_end_icon_content_description
+string confirm_mode_change_message
+string confirm_mode_change_title
+string confirm_no
+string confirm_yes
 string connected
 string connecting
 string device_saved
@@ -3921,6 +3935,8 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string mode_auto
+string mode_manual
 string mtrl_badge_numberless_content_description
 string mtrl_checkbox_button_icon_path_checked
 string mtrl_checkbox_button_icon_path_group_name

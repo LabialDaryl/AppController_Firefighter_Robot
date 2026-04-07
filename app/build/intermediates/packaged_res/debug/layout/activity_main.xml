@@ -11,59 +11,82 @@
     <!-- ═══════════════════════════════════════════════════════
          TOP STATUS BAR
          ═══════════════════════════════════════════════════════ -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/statusBar"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingStart="20dp"
+        android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:background="@color/fire_red_dark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- App title -->
         <TextView
+            android:id="@+id/robotTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🚒 FIREFIGHTER ROBOT"
+            android:text="🚒 ROBOT"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:letterSpacing="0.08" />
+            android:letterSpacing="0.08"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <!-- Connection status dot + label -->
-        <TextView
-            android:id="@+id/connectionStatusText"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modeToggleButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/disconnected"
-            android:textColor="@color/black"
-            android:textSize="13sp"
+            android:text="@string/mode_manual"
+            android:textColor="@color/white"
+            android:textSize="11sp"
             android:textStyle="bold"
-            android:paddingEnd="16dp" />
+            app:icon="@drawable/ic_toggle_manual"
+            app:iconTint="@null"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="12dp"
+            android:minHeight="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Settings gear -->
-        <ImageButton
-            android:id="@+id/settingsButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@android:drawable/ic_menu_preferences"
-            android:tint="@color/white"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/settings" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/statusRightPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- ═══════════════════════════════════════════════════════
-         VERTICAL GUIDELINES  (33% | 33% | 33%)
-         ═══════════════════════════════════════════════════════ -->
+            <TextView
+                android:id="@+id/connectionStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disconnected"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingEnd="8dp" />
+
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:tint="@color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/settings" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLeft"
         android:layout_width="0dp"
@@ -79,7 +102,7 @@
         app:layout_constraintGuide_percent="0.665" />
 
     <!-- ═══════════════════════════════════════════════════════
-         LEFT PANEL  —  MOVEMENT JOYSTICK
+         LEFT PANEL  —  DRIVE CONTROLS (F/B ARROWS)
          ═══════════════════════════════════════════════════════ -->
     <LinearLayout
         android:id="@+id/movementPanel"
@@ -87,45 +110,36 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingStart="12dp"
-        android:paddingEnd="6dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         app:layout_constraintTop_toBottomOf="@id/statusBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideLeft">
 
-        <!-- Section label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_movement"
+            android:text="DRIVE"
             android:textColor="@color/safety_yellow"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:letterSpacing="0.12"
-            android:layout_marginBottom="6dp" />
+            android:layout_marginBottom="16dp" />
 
-        <!-- Joystick widget -->
-        <com.firefighter.robotcontroller.JoystickView
-            android:id="@+id/movementJoystick"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="6dp" />
+        <ImageButton
+            android:id="@+id/btnForward"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/arrow_up_float"
+            android:background="@drawable/btn_arrow_selector"
+            android:layout_marginBottom="24dp" />
 
-        <!-- Hint text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_movement_hint"
-            android:textColor="@color/light_gray"
-            android:textSize="11sp"
-            android:gravity="center" />
+        <ImageButton
+            android:id="@+id/btnBackward"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/arrow_down_float"
+            android:background="@drawable/btn_arrow_selector" />
     </LinearLayout>
 
-    <!-- Left | Center thin divider -->
     <View
         android:id="@+id/dividerLeft"
         android:layout_width="1dp"
@@ -144,94 +158,43 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@id/statusBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideLeft"
         app:layout_constraintEnd_toStartOf="@id/guideRight">
 
-        <!-- Section label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_controls"
-            android:textColor="@color/safety_yellow"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.12"
-            android:layout_marginBottom="10dp" />
-
-        <!-- ── SUPPRESS FIRE ── -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pumpButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginBottom="8dp"
-            android:text="💧 SUPPRESS\nFIRE"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            app:cornerRadius="14dp"
-            app:backgroundTint="@color/red_inactive"
-            app:rippleColor="#33FFFFFF" />
+            android:layout_marginBottom="12dp"
+            android:text="💧 PUMP"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/red_inactive" />
 
-        <!-- ── LIGHTS ── -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/lightsButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             android:text="💡 LIGHTS"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            app:cornerRadius="14dp"
-            app:backgroundTint="@color/red_inactive"
-            app:rippleColor="#33FFFFFF" />
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/red_inactive" />
 
-        <!-- ── HORN (hold) ── -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/hornButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginBottom="8dp"
-            android:text="📢 HORN\n(HOLD)"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            app:cornerRadius="14dp"
-            app:backgroundTint="@color/fire_orange"
-            app:rippleColor="#33FFFFFF" />
-
-        <!-- ── EMERGENCY STOP ── -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/emergencyStopButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="⛔ E-STOP"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            app:cornerRadius="14dp"
-            app:backgroundTint="@color/fire_red"
-            app:strokeColor="@color/safety_yellow"
-            app:strokeWidth="2dp"
-            app:rippleColor="#55FDD835" />
+            android:text="📢 HORN"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/fire_orange" />
 
     </LinearLayout>
 
-    <!-- Center | Right thin divider -->
     <View
         android:id="@+id/dividerRight"
         android:layout_width="1dp"
@@ -242,50 +205,76 @@
         app:layout_constraintStart_toStartOf="@id/guideRight" />
 
     <!-- ═══════════════════════════════════════════════════════
-         RIGHT PANEL  —  NOZZLE AIM JOYSTICK
+         RIGHT PANEL  —  STEERING + NOZZLE
          ═══════════════════════════════════════════════════════ -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nozzlePanel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingStart="6dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         app:layout_constraintTop_toBottomOf="@id/statusBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideRight"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Section label -->
         <TextView
+            android:id="@+id/labelSteerNoz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_nozzle"
+            android:text="STEER / NOZZLE"
             android:textColor="@color/safety_yellow"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:letterSpacing="0.12"
-            android:layout_marginBottom="6dp" />
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Joystick widget -->
-        <com.firefighter.robotcontroller.JoystickView
-            android:id="@+id/nozzleJoystick"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="6dp" />
+        <ImageButton
+            android:id="@+id/btnNozzleUp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/arrow_up_float"
+            android:background="@drawable/btn_arrow_selector"
+            app:layout_constraintTop_toBottomOf="@id/labelSteerNoz"
+            app:layout_constraintBottom_toTopOf="@id/btnNozzleDown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginBottom="8dp" />
 
-        <!-- Hint text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_nozzle_hint"
-            android:textColor="@color/light_gray"
-            android:textSize="11sp"
-            android:gravity="center" />
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btnTurnLeft"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/ic_media_previous"
+            android:background="@drawable/btn_arrow_selector"
+            app:layout_constraintTop_toTopOf="@id/btnNozzleUp"
+            app:layout_constraintBottom_toBottomOf="@id/btnNozzleDown"
+            app:layout_constraintEnd_toStartOf="@id/btnNozzleUp"
+            android:layout_marginEnd="8dp" />
+
+        <ImageButton
+            android:id="@+id/btnTurnRight"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/ic_media_next"
+            android:background="@drawable/btn_arrow_selector"
+            app:layout_constraintTop_toTopOf="@id/btnNozzleUp"
+            app:layout_constraintBottom_toBottomOf="@id/btnNozzleDown"
+            app:layout_constraintStart_toEndOf="@id/btnNozzleUp"
+            android:layout_marginStart="8dp" />
+
+        <ImageButton
+            android:id="@+id/btnNozzleDown"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/arrow_down_float"
+            android:background="@drawable/btn_arrow_selector"
+            app:layout_constraintTop_toBottomOf="@id/btnNozzleUp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

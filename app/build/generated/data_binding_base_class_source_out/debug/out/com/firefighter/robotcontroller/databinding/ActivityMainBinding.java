@@ -13,7 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.firefighter.robotcontroller.JoystickView;
 import com.firefighter.robotcontroller.R;
 import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
@@ -23,6 +22,24 @@ import java.lang.String;
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
+
+  @NonNull
+  public final ImageButton btnBackward;
+
+  @NonNull
+  public final ImageButton btnForward;
+
+  @NonNull
+  public final ImageButton btnNozzleDown;
+
+  @NonNull
+  public final ImageButton btnNozzleUp;
+
+  @NonNull
+  public final ImageButton btnTurnLeft;
+
+  @NonNull
+  public final ImageButton btnTurnRight;
 
   @NonNull
   public final TextView connectionStatusText;
@@ -37,9 +54,6 @@ public final class ActivityMainBinding implements ViewBinding {
   public final View dividerRight;
 
   @NonNull
-  public final MaterialButton emergencyStopButton;
-
-  @NonNull
   public final Guideline guideLeft;
 
   @NonNull
@@ -49,55 +63,71 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialButton hornButton;
 
   @NonNull
+  public final TextView labelSteerNoz;
+
+  @NonNull
   public final MaterialButton lightsButton;
 
   @NonNull
-  public final JoystickView movementJoystick;
+  public final MaterialButton modeToggleButton;
 
   @NonNull
   public final LinearLayout movementPanel;
 
   @NonNull
-  public final JoystickView nozzleJoystick;
-
-  @NonNull
-  public final LinearLayout nozzlePanel;
+  public final ConstraintLayout nozzlePanel;
 
   @NonNull
   public final MaterialButton pumpButton;
 
   @NonNull
+  public final TextView robotTitle;
+
+  @NonNull
   public final ImageButton settingsButton;
 
   @NonNull
-  public final LinearLayout statusBar;
+  public final ConstraintLayout statusBar;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull TextView connectionStatusText, @NonNull LinearLayout controlPanel,
-      @NonNull View dividerLeft, @NonNull View dividerRight,
-      @NonNull MaterialButton emergencyStopButton, @NonNull Guideline guideLeft,
-      @NonNull Guideline guideRight, @NonNull MaterialButton hornButton,
-      @NonNull MaterialButton lightsButton, @NonNull JoystickView movementJoystick,
-      @NonNull LinearLayout movementPanel, @NonNull JoystickView nozzleJoystick,
-      @NonNull LinearLayout nozzlePanel, @NonNull MaterialButton pumpButton,
-      @NonNull ImageButton settingsButton, @NonNull LinearLayout statusBar) {
+  @NonNull
+  public final LinearLayout statusRightPanel;
+
+  private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull ImageButton btnBackward,
+      @NonNull ImageButton btnForward, @NonNull ImageButton btnNozzleDown,
+      @NonNull ImageButton btnNozzleUp, @NonNull ImageButton btnTurnLeft,
+      @NonNull ImageButton btnTurnRight, @NonNull TextView connectionStatusText,
+      @NonNull LinearLayout controlPanel, @NonNull View dividerLeft, @NonNull View dividerRight,
+      @NonNull Guideline guideLeft, @NonNull Guideline guideRight,
+      @NonNull MaterialButton hornButton, @NonNull TextView labelSteerNoz,
+      @NonNull MaterialButton lightsButton, @NonNull MaterialButton modeToggleButton,
+      @NonNull LinearLayout movementPanel, @NonNull ConstraintLayout nozzlePanel,
+      @NonNull MaterialButton pumpButton, @NonNull TextView robotTitle,
+      @NonNull ImageButton settingsButton, @NonNull ConstraintLayout statusBar,
+      @NonNull LinearLayout statusRightPanel) {
     this.rootView = rootView;
+    this.btnBackward = btnBackward;
+    this.btnForward = btnForward;
+    this.btnNozzleDown = btnNozzleDown;
+    this.btnNozzleUp = btnNozzleUp;
+    this.btnTurnLeft = btnTurnLeft;
+    this.btnTurnRight = btnTurnRight;
     this.connectionStatusText = connectionStatusText;
     this.controlPanel = controlPanel;
     this.dividerLeft = dividerLeft;
     this.dividerRight = dividerRight;
-    this.emergencyStopButton = emergencyStopButton;
     this.guideLeft = guideLeft;
     this.guideRight = guideRight;
     this.hornButton = hornButton;
+    this.labelSteerNoz = labelSteerNoz;
     this.lightsButton = lightsButton;
-    this.movementJoystick = movementJoystick;
+    this.modeToggleButton = modeToggleButton;
     this.movementPanel = movementPanel;
-    this.nozzleJoystick = nozzleJoystick;
     this.nozzlePanel = nozzlePanel;
     this.pumpButton = pumpButton;
+    this.robotTitle = robotTitle;
     this.settingsButton = settingsButton;
     this.statusBar = statusBar;
+    this.statusRightPanel = statusRightPanel;
   }
 
   @Override
@@ -127,6 +157,42 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnBackward;
+      ImageButton btnBackward = ViewBindings.findChildViewById(rootView, id);
+      if (btnBackward == null) {
+        break missingId;
+      }
+
+      id = R.id.btnForward;
+      ImageButton btnForward = ViewBindings.findChildViewById(rootView, id);
+      if (btnForward == null) {
+        break missingId;
+      }
+
+      id = R.id.btnNozzleDown;
+      ImageButton btnNozzleDown = ViewBindings.findChildViewById(rootView, id);
+      if (btnNozzleDown == null) {
+        break missingId;
+      }
+
+      id = R.id.btnNozzleUp;
+      ImageButton btnNozzleUp = ViewBindings.findChildViewById(rootView, id);
+      if (btnNozzleUp == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTurnLeft;
+      ImageButton btnTurnLeft = ViewBindings.findChildViewById(rootView, id);
+      if (btnTurnLeft == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTurnRight;
+      ImageButton btnTurnRight = ViewBindings.findChildViewById(rootView, id);
+      if (btnTurnRight == null) {
+        break missingId;
+      }
+
       id = R.id.connectionStatusText;
       TextView connectionStatusText = ViewBindings.findChildViewById(rootView, id);
       if (connectionStatusText == null) {
@@ -151,12 +217,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.emergencyStopButton;
-      MaterialButton emergencyStopButton = ViewBindings.findChildViewById(rootView, id);
-      if (emergencyStopButton == null) {
-        break missingId;
-      }
-
       id = R.id.guideLeft;
       Guideline guideLeft = ViewBindings.findChildViewById(rootView, id);
       if (guideLeft == null) {
@@ -175,15 +235,21 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.labelSteerNoz;
+      TextView labelSteerNoz = ViewBindings.findChildViewById(rootView, id);
+      if (labelSteerNoz == null) {
+        break missingId;
+      }
+
       id = R.id.lightsButton;
       MaterialButton lightsButton = ViewBindings.findChildViewById(rootView, id);
       if (lightsButton == null) {
         break missingId;
       }
 
-      id = R.id.movementJoystick;
-      JoystickView movementJoystick = ViewBindings.findChildViewById(rootView, id);
-      if (movementJoystick == null) {
+      id = R.id.modeToggleButton;
+      MaterialButton modeToggleButton = ViewBindings.findChildViewById(rootView, id);
+      if (modeToggleButton == null) {
         break missingId;
       }
 
@@ -193,14 +259,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.nozzleJoystick;
-      JoystickView nozzleJoystick = ViewBindings.findChildViewById(rootView, id);
-      if (nozzleJoystick == null) {
-        break missingId;
-      }
-
       id = R.id.nozzlePanel;
-      LinearLayout nozzlePanel = ViewBindings.findChildViewById(rootView, id);
+      ConstraintLayout nozzlePanel = ViewBindings.findChildViewById(rootView, id);
       if (nozzlePanel == null) {
         break missingId;
       }
@@ -211,6 +271,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.robotTitle;
+      TextView robotTitle = ViewBindings.findChildViewById(rootView, id);
+      if (robotTitle == null) {
+        break missingId;
+      }
+
       id = R.id.settingsButton;
       ImageButton settingsButton = ViewBindings.findChildViewById(rootView, id);
       if (settingsButton == null) {
@@ -218,15 +284,22 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       id = R.id.statusBar;
-      LinearLayout statusBar = ViewBindings.findChildViewById(rootView, id);
+      ConstraintLayout statusBar = ViewBindings.findChildViewById(rootView, id);
       if (statusBar == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, connectionStatusText,
-          controlPanel, dividerLeft, dividerRight, emergencyStopButton, guideLeft, guideRight,
-          hornButton, lightsButton, movementJoystick, movementPanel, nozzleJoystick, nozzlePanel,
-          pumpButton, settingsButton, statusBar);
+      id = R.id.statusRightPanel;
+      LinearLayout statusRightPanel = ViewBindings.findChildViewById(rootView, id);
+      if (statusRightPanel == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((ConstraintLayout) rootView, btnBackward, btnForward,
+          btnNozzleDown, btnNozzleUp, btnTurnLeft, btnTurnRight, connectionStatusText, controlPanel,
+          dividerLeft, dividerRight, guideLeft, guideRight, hornButton, labelSteerNoz, lightsButton,
+          modeToggleButton, movementPanel, nozzlePanel, pumpButton, robotTitle, settingsButton,
+          statusBar, statusRightPanel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

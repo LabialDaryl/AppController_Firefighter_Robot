@@ -30,4 +30,12 @@
     <string name="device_saved">Device saved! Returning…</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
+
+    <!-- Mode Switching -->
+    <string name="mode_manual">MODE: MANUAL</string>
+    <string name="mode_auto">MODE: AUTO</string>
+    <string name="confirm_mode_change_title">Switch Mode</string>
+    <string name="confirm_mode_change_message">Are you sure you want to switch to %s mode?</string>
+    <string name="confirm_yes">Yes, Switch</string>
+    <string name="confirm_no">Cancel</string>
 </resources>
