@@ -1,34 +1,40 @@
-# Hardware Components List
+# Hardware Components
 
-This document lists the hardware components used in the Firefighter Robot project, organized by their role in the system.
+This document lists all hardware components used in the Firefighter Robot system.
 
-## 1. Control & Processing
-- **ESP32 Dev Module:** Main controller handling WiFi/UDP communication, manual/auto logic, and high-level coordination.
-- **Arduino Uno:** Peripheral sensor hub. Offloads sensor reading and processing from the ESP32. Communicates via I2C (Address: `0x08`).
+## Microcontrollers
+- ESP32 (Main Controller)
+- Arduino Uno (Sensor Hub)
 
-## 2. Locomotion & Drive
-- **L298N Dual H-Bridge Motor Driver:** Controls the two main DC drive motors.
-- **2x DC Gear Motors:** High-torque motors for robot movement.
+## Motor Drivers
+- L298N (Dual H-Bridge for DC Motors)
 
-## 3. Suppression System
-- **PCA9685 16-Channel 12-bit PWM/Servo Driver:** Controls the suppression servos via I2C (Address: `0x40`).
-- **2x MG996R High Torque Servos:** 
-    - **Sweeping Servo:** Controls the horizontal sweeping mechanism of the extinguisher nozzle.
-    - **Extinguishing Servo:** Mechanically actuates the trigger of the 500ml portable fire extinguisher to release the suppression agent.
-- **500ml Portable Fire Extinguisher:** The primary suppression agent, replacing the water pump system.
+## Servo Drivers
+- PCA9685 (16-Channel PWM Servo Driver)
 
-## 4. Sensing (Managed by Arduino Uno)
-- **5-Channel Flame Sensor Array:** Mounted on the front for directional fire detection.
-- **KY-026 Flame Sensor:** Mounted on the back for rear fire detection.
-- **MQ-2 Smoke/Gas Sensor:** For fire verification and safety.
-- **Ultrasonic Sensors (HC-SR04):** For front and back distance measurement/obstacle avoidance.
-- **IR Obstacle Sensors:** For left/right edge and obstacle detection.
+## Sensors
+- 5-Channel Flame Sensor Array (Front)
+- KY-026 Flame Sensor (Rear)
+- HC-SR04 Ultrasonic Sensors (Front and Rear)
+- MQ-2 Smoke/Gas Sensor
+- KY-032 Obstacle IR Sensors (Left and Right)
 
-## 5. Feedback & Indicators
-- **LCD 1602 with I2C Adapter:** Displays system status, mode (Manual/Auto), and sensor data (Address: `0x27`).
-- **Active Buzzer/Horn:** Audible alerts for fire detection or system status.
-- **Ultra-Bright LEDs:** For lighting and status indication.
+## Displays
+- LCD 1602 (I2C)
 
-## 6. Power System
-- **Power Source:** Typically a Li-ion battery pack (7.4V or 11.1V).
-- **Voltage Regulators:** Buck converters to provide stable 5V for the microcontrollers/sensors and high current for servos.
+## Actuators
+- MG996R Servos (Sweeping and Extinguish)
+- DC Motors (Locomotion)
+
+## Indicators and Outputs
+- Ultra-Bright LEDs
+- Active Buzzer (Alarm Indicator)
+- Horn (Integrated with Buzzer)
+
+## Power Supply
+- External 7.4V Li-ion Battery (for Motors and Servos)
+- 5V and 3.3V Regulators (for Logic)
+
+## Miscellaneous
+- Logic Level Shifter (for I2C between ESP32 and Arduino)
+- Wiring and Connectors
