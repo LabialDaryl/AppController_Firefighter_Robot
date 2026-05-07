@@ -39,6 +39,11 @@ const int MOTOR_ENA = 25, MOTOR_ENB = 19;
 const int LEDC_FREQ = 15000, LEDC_RES = 8;
 const int DRIVE_SPEED = 200, TURN_SPEED = 200;
 
+// Motor Calibration Bias (Adjust these to balance speeds)
+// If Right is faster, decrease R_MOTOR_BIAS (e.g., to 0.95 or 0.90)
+const float L_MOTOR_BIAS = 1.00;
+const float R_MOTOR_BIAS = 0.97; // Reduced to 0.94 to balance faster right motor
+
 // Peripherals
 const int PUMP_PIN = 33, LIGHT_PIN = 32, HORN_PIN = 23;
 
@@ -281,8 +286,14 @@ void setServoAngle(uint8_t ch, int angle) {
 void driveMotors(int l1, int l2, int r3, int r4, int speed) {
   digitalWrite(MOTOR_IN1, l1); digitalWrite(MOTOR_IN2, l2);
   digitalWrite(MOTOR_IN3, r3); digitalWrite(MOTOR_IN4, r4);
-  targetSpeedL = speed;
-  targetSpeedR = speed;
+
+  // Apply calibration bias to ensure balanced movement
+  targetSpeedL = (int)(speed * L_MOTOR_BIAS);
+  targetSpeedR = (int)(speed * R_MOTOR_BIAS);
+
+  // Constrain to PWM limits
+  targetSpeedL = constrain(targetSpeedL, 0, 255);
+  targetSpeedR = constrain(targetSpeedR, 0, 255);
 }
 
 void stopMotors() {
