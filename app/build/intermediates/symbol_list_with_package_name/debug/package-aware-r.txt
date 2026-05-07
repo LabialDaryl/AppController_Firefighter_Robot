@@ -3197,8 +3197,6 @@ id bounceEnd
 id bounceStart
 id btnBackward
 id btnForward
-id btnNozzleDown
-id btnNozzleUp
 id btnTurnLeft
 id btnTurnRight
 id buttonPanel
@@ -3265,8 +3263,6 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
-id dividerLeft
-id dividerRight
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3292,6 +3288,7 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id extinguishButton
 id fade
 id fill
 id fill_horizontal
@@ -3326,7 +3323,6 @@ id home
 id homeAsUp
 id honorRequest
 id horizontal_only
-id hornButton
 id icon
 id icon_group
 id ifRoom
@@ -3345,13 +3341,11 @@ id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
-id labelSteerNoz
 id labeled
 id layout
 id left
 id leftToRight
 id legacy
-id lightsButton
 id line1
 id line3
 id linear
@@ -3437,7 +3431,6 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
-id nozzlePanel
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -3477,7 +3470,6 @@ id postLayout
 id pressed
 id progress_circular
 id progress_horizontal
-id pumpButton
 id radio
 id ratio
 id rectangles
@@ -3522,6 +3514,7 @@ id showCustom
 id showHome
 id showTitle
 id sin
+id sirenButton
 id skipCollapsed
 id skipped
 id slide
@@ -3542,6 +3535,7 @@ id src_atop
 id src_in
 id src_over
 id standard
+id standbyButton
 id start
 id startHorizontal
 id startToEnd
@@ -3549,7 +3543,7 @@ id startVertical
 id staticLayout
 id staticPostLayout
 id statusBar
-id statusRightPanel
+id steeringPanel
 id stop
 id stretch
 id submenuarrow

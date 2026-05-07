@@ -1,42 +1,46 @@
 [
     {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
         "merged": "com.firefighter.robotcontroller.app-merged_res-34:/layout_activity_main.xml.flat",
         "source": "com.firefighter.robotcontroller.app-main-36:/layout/activity_main.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_btn_arrow_selector.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/btn_arrow_selector.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_toggle_manual.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_toggle_manual.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_toggle_auto.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_toggle_auto.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/layout_activity_settings.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/layout/activity_settings.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_btn_arrow_selector.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\btn_arrow_selector.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/layout_item_ble_device.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/layout/item_ble_device.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\layout_item_ble_device.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\item_ble_device.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_toggle_manual.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_toggle_manual.xml"
     },
     {
-        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_toggle_auto.xml.flat",
-        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_toggle_auto.xml"
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\layout_activity_settings.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\activity_settings.xml"
     }
 ]

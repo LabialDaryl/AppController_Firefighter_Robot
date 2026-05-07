@@ -30,12 +30,6 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ImageButton btnForward;
 
   @NonNull
-  public final ImageButton btnNozzleDown;
-
-  @NonNull
-  public final ImageButton btnNozzleUp;
-
-  @NonNull
   public final ImageButton btnTurnLeft;
 
   @NonNull
@@ -48,10 +42,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final LinearLayout controlPanel;
 
   @NonNull
-  public final View dividerLeft;
-
-  @NonNull
-  public final View dividerRight;
+  public final MaterialButton extinguishButton;
 
   @NonNull
   public final Guideline guideLeft;
@@ -60,25 +51,10 @@ public final class ActivityMainBinding implements ViewBinding {
   public final Guideline guideRight;
 
   @NonNull
-  public final MaterialButton hornButton;
-
-  @NonNull
-  public final TextView labelSteerNoz;
-
-  @NonNull
-  public final MaterialButton lightsButton;
-
-  @NonNull
   public final MaterialButton modeToggleButton;
 
   @NonNull
   public final LinearLayout movementPanel;
-
-  @NonNull
-  public final ConstraintLayout nozzlePanel;
-
-  @NonNull
-  public final MaterialButton pumpButton;
 
   @NonNull
   public final TextView robotTitle;
@@ -87,47 +63,44 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ImageButton settingsButton;
 
   @NonNull
+  public final MaterialButton sirenButton;
+
+  @NonNull
+  public final MaterialButton standbyButton;
+
+  @NonNull
   public final ConstraintLayout statusBar;
 
   @NonNull
-  public final LinearLayout statusRightPanel;
+  public final ConstraintLayout steeringPanel;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull ImageButton btnBackward,
-      @NonNull ImageButton btnForward, @NonNull ImageButton btnNozzleDown,
-      @NonNull ImageButton btnNozzleUp, @NonNull ImageButton btnTurnLeft,
+      @NonNull ImageButton btnForward, @NonNull ImageButton btnTurnLeft,
       @NonNull ImageButton btnTurnRight, @NonNull TextView connectionStatusText,
-      @NonNull LinearLayout controlPanel, @NonNull View dividerLeft, @NonNull View dividerRight,
+      @NonNull LinearLayout controlPanel, @NonNull MaterialButton extinguishButton,
       @NonNull Guideline guideLeft, @NonNull Guideline guideRight,
-      @NonNull MaterialButton hornButton, @NonNull TextView labelSteerNoz,
-      @NonNull MaterialButton lightsButton, @NonNull MaterialButton modeToggleButton,
-      @NonNull LinearLayout movementPanel, @NonNull ConstraintLayout nozzlePanel,
-      @NonNull MaterialButton pumpButton, @NonNull TextView robotTitle,
-      @NonNull ImageButton settingsButton, @NonNull ConstraintLayout statusBar,
-      @NonNull LinearLayout statusRightPanel) {
+      @NonNull MaterialButton modeToggleButton, @NonNull LinearLayout movementPanel,
+      @NonNull TextView robotTitle, @NonNull ImageButton settingsButton,
+      @NonNull MaterialButton sirenButton, @NonNull MaterialButton standbyButton,
+      @NonNull ConstraintLayout statusBar, @NonNull ConstraintLayout steeringPanel) {
     this.rootView = rootView;
     this.btnBackward = btnBackward;
     this.btnForward = btnForward;
-    this.btnNozzleDown = btnNozzleDown;
-    this.btnNozzleUp = btnNozzleUp;
     this.btnTurnLeft = btnTurnLeft;
     this.btnTurnRight = btnTurnRight;
     this.connectionStatusText = connectionStatusText;
     this.controlPanel = controlPanel;
-    this.dividerLeft = dividerLeft;
-    this.dividerRight = dividerRight;
+    this.extinguishButton = extinguishButton;
     this.guideLeft = guideLeft;
     this.guideRight = guideRight;
-    this.hornButton = hornButton;
-    this.labelSteerNoz = labelSteerNoz;
-    this.lightsButton = lightsButton;
     this.modeToggleButton = modeToggleButton;
     this.movementPanel = movementPanel;
-    this.nozzlePanel = nozzlePanel;
-    this.pumpButton = pumpButton;
     this.robotTitle = robotTitle;
     this.settingsButton = settingsButton;
+    this.sirenButton = sirenButton;
+    this.standbyButton = standbyButton;
     this.statusBar = statusBar;
-    this.statusRightPanel = statusRightPanel;
+    this.steeringPanel = steeringPanel;
   }
 
   @Override
@@ -169,18 +142,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnNozzleDown;
-      ImageButton btnNozzleDown = ViewBindings.findChildViewById(rootView, id);
-      if (btnNozzleDown == null) {
-        break missingId;
-      }
-
-      id = R.id.btnNozzleUp;
-      ImageButton btnNozzleUp = ViewBindings.findChildViewById(rootView, id);
-      if (btnNozzleUp == null) {
-        break missingId;
-      }
-
       id = R.id.btnTurnLeft;
       ImageButton btnTurnLeft = ViewBindings.findChildViewById(rootView, id);
       if (btnTurnLeft == null) {
@@ -205,15 +166,9 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.dividerLeft;
-      View dividerLeft = ViewBindings.findChildViewById(rootView, id);
-      if (dividerLeft == null) {
-        break missingId;
-      }
-
-      id = R.id.dividerRight;
-      View dividerRight = ViewBindings.findChildViewById(rootView, id);
-      if (dividerRight == null) {
+      id = R.id.extinguishButton;
+      MaterialButton extinguishButton = ViewBindings.findChildViewById(rootView, id);
+      if (extinguishButton == null) {
         break missingId;
       }
 
@@ -229,24 +184,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.hornButton;
-      MaterialButton hornButton = ViewBindings.findChildViewById(rootView, id);
-      if (hornButton == null) {
-        break missingId;
-      }
-
-      id = R.id.labelSteerNoz;
-      TextView labelSteerNoz = ViewBindings.findChildViewById(rootView, id);
-      if (labelSteerNoz == null) {
-        break missingId;
-      }
-
-      id = R.id.lightsButton;
-      MaterialButton lightsButton = ViewBindings.findChildViewById(rootView, id);
-      if (lightsButton == null) {
-        break missingId;
-      }
-
       id = R.id.modeToggleButton;
       MaterialButton modeToggleButton = ViewBindings.findChildViewById(rootView, id);
       if (modeToggleButton == null) {
@@ -256,18 +193,6 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.movementPanel;
       LinearLayout movementPanel = ViewBindings.findChildViewById(rootView, id);
       if (movementPanel == null) {
-        break missingId;
-      }
-
-      id = R.id.nozzlePanel;
-      ConstraintLayout nozzlePanel = ViewBindings.findChildViewById(rootView, id);
-      if (nozzlePanel == null) {
-        break missingId;
-      }
-
-      id = R.id.pumpButton;
-      MaterialButton pumpButton = ViewBindings.findChildViewById(rootView, id);
-      if (pumpButton == null) {
         break missingId;
       }
 
@@ -283,23 +208,34 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.sirenButton;
+      MaterialButton sirenButton = ViewBindings.findChildViewById(rootView, id);
+      if (sirenButton == null) {
+        break missingId;
+      }
+
+      id = R.id.standbyButton;
+      MaterialButton standbyButton = ViewBindings.findChildViewById(rootView, id);
+      if (standbyButton == null) {
+        break missingId;
+      }
+
       id = R.id.statusBar;
       ConstraintLayout statusBar = ViewBindings.findChildViewById(rootView, id);
       if (statusBar == null) {
         break missingId;
       }
 
-      id = R.id.statusRightPanel;
-      LinearLayout statusRightPanel = ViewBindings.findChildViewById(rootView, id);
-      if (statusRightPanel == null) {
+      id = R.id.steeringPanel;
+      ConstraintLayout steeringPanel = ViewBindings.findChildViewById(rootView, id);
+      if (steeringPanel == null) {
         break missingId;
       }
 
       return new ActivityMainBinding((ConstraintLayout) rootView, btnBackward, btnForward,
-          btnNozzleDown, btnNozzleUp, btnTurnLeft, btnTurnRight, connectionStatusText, controlPanel,
-          dividerLeft, dividerRight, guideLeft, guideRight, hornButton, labelSteerNoz, lightsButton,
-          modeToggleButton, movementPanel, nozzlePanel, pumpButton, robotTitle, settingsButton,
-          statusBar, statusRightPanel);
+          btnTurnLeft, btnTurnRight, connectionStatusText, controlPanel, extinguishButton,
+          guideLeft, guideRight, modeToggleButton, movementPanel, robotTitle, settingsButton,
+          sirenButton, standbyButton, statusBar, steeringPanel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

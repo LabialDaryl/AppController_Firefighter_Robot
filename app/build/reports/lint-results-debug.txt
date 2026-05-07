@@ -1,0 +1,371 @@
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:13: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk 34
+        ~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application runs on a version of Android that is more recent than
+   your targetSdkVersion specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdkVersion
+   is less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:38: Warning: A newer version of androidx.core:core-ktx than 1.12.0 is available: 1.18.0 [GradleDependency]
+    implementation 'androidx.core:core-ktx:1.12.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:39: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:40: Warning: A newer version of com.google.android.material:material than 1.11.0 is available: 1.13.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.11.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:41: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1 [GradleDependency]
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:42: Warning: A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.7.0 is available: 2.10.0 [GradleDependency]
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:43: Warning: A newer version of androidx.recyclerview:recyclerview than 1.3.2 is available: 1.4.0 [GradleDependency]
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:46: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\build.gradle:47: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\mipmap-anydpi-v26: Warning: This folder configuration (v26) is unnecessary; minSdkVersion is 26. Merge all the resources in this folder into mipmap-anydpi. [ObsoleteSdkInt]
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:8: Warning: Possible overdraw: Root element paints background @color/dark_background with a theme that also paints a background (inferred theme is @style/Theme.FirefighterRobotController) [Overdraw]
+    android:background="@color/dark_background"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:7: Warning: Possible overdraw: Root element paints background @color/dark_background with a theme that also paints a background (inferred theme is @style/Theme.FirefighterRobotController) [Overdraw]
+    android:background="@color/dark_background">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\colors.xml:11: Warning: The resource R.color.surface_card appears to be unused [UnusedResources]
+    <color name="surface_card">#2C2C2C</color>
+           ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\colors.xml:12: Warning: The resource R.color.divider_color appears to be unused [UnusedResources]
+    <color name="divider_color">#3A3A3A</color>
+           ~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\colors.xml:15: Warning: The resource R.color.text_primary appears to be unused [UnusedResources]
+    <color name="text_primary">#FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\colors.xml:16: Warning: The resource R.color.light_gray appears to be unused [UnusedResources]
+    <color name="light_gray">#B0BEC5</color>
+           ~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\colors.xml:27: Warning: The resource R.color.joystick_crosshair appears to be unused [UnusedResources]
+    <color name="joystick_crosshair">#FF6F00</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\item_ble_device.xml:2: Warning: The resource R.layout.item_ble_device appears to be unused [UnusedResources]
+<com.google.android.material.card.MaterialCardView
+^
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:4: Warning: The resource R.string.connected appears to be unused [UnusedResources]
+    <string name="connected">🟢 Connected</string>
+            ~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:5: Warning: The resource R.string.disconnected appears to be unused [UnusedResources]
+    <string name="disconnected">🔴 Disconnected</string>
+            ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:6: Warning: The resource R.string.connecting appears to be unused [UnusedResources]
+    <string name="connecting">🟡 Connecting…</string>
+            ~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:9: Warning: The resource R.string.label_movement appears to be unused [UnusedResources]
+    <string name="label_movement">MOVEMENT</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:10: Warning: The resource R.string.label_movement_hint appears to be unused [UnusedResources]
+    <string name="label_movement_hint">Forward · Back · Left · Right</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:11: Warning: The resource R.string.label_nozzle appears to be unused [UnusedResources]
+    <string name="label_nozzle">NOZZLE AIM</string>
+            ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:12: Warning: The resource R.string.label_nozzle_hint appears to be unused [UnusedResources]
+    <string name="label_nozzle_hint">Pan · Tilt · Direction</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:13: Warning: The resource R.string.label_controls appears to be unused [UnusedResources]
+    <string name="label_controls">CONTROLS</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:16: Warning: The resource R.string.btn_suppress_fire_off appears to be unused [UnusedResources]
+    <string name="btn_suppress_fire_off">💧 SUPPRESS\nFIRE</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:17: Warning: The resource R.string.btn_suppress_fire_on appears to be unused [UnusedResources]
+    <string name="btn_suppress_fire_on">💧 SUPPRESS\nFIRE ✔</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:18: Warning: The resource R.string.btn_lights_off appears to be unused [UnusedResources]
+    <string name="btn_lights_off">💡 LIGHTS</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:19: Warning: The resource R.string.btn_lights_on appears to be unused [UnusedResources]
+    <string name="btn_lights_on">💡 LIGHTS ✔</string>
+            ~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:20: Warning: The resource R.string.btn_horn appears to be unused [UnusedResources]
+    <string name="btn_horn">📢 HORN\n(HOLD)</string>
+            ~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:21: Warning: The resource R.string.btn_estop appears to be unused [UnusedResources]
+    <string name="btn_estop">⛔ E-STOP</string>
+            ~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:24: Warning: The resource R.string.settings appears to be unused [UnusedResources]
+    <string name="settings">Settings</string>
+            ~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:25: Warning: The resource R.string.select_device appears to be unused [UnusedResources]
+    <string name="select_device">Select Your ESP32 Device</string>
+            ~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:26: Warning: The resource R.string.scan_devices appears to be unused [UnusedResources]
+    <string name="scan_devices">🔍 Scan for Devices</string>
+            ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:27: Warning: The resource R.string.scanning appears to be unused [UnusedResources]
+    <string name="scanning">Scanning…</string>
+            ~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:28: Warning: The resource R.string.no_devices appears to be unused [UnusedResources]
+    <string name="no_devices">No devices found. Tap Scan.</string>
+            ~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:29: Warning: The resource R.string.save appears to be unused [UnusedResources]
+    <string name="save">✔ Save Device</string>
+            ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:30: Warning: The resource R.string.device_saved appears to be unused [UnusedResources]
+    <string name="device_saved">Device saved! Returning…</string>
+            ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:31: Warning: The resource R.string.on appears to be unused [UnusedResources]
+    <string name="on">ON</string>
+            ~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\values\strings.xml:32: Warning: The resource R.string.off appears to be unused [UnusedResources]
+    <string name="off">OFF</string>
+            ~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\mipmap-anydpi-v26\ic_launcher.xml:2: Warning: The application adaptive icon is missing a monochrome tag [MonochromeLauncherIcon]
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+^
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\mipmap-anydpi-v26\ic_launcher_round.xml:2: Warning: The application adaptive roundIcon is missing a monochrome tag [MonochromeLauncherIcon]
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+^
+
+   Explanation for issues of type "MonochromeLauncherIcon":
+   If android:roundIcon and android:icon are both in your manifest, you must
+   either remove the reference to android:roundIcon if it is not needed; or,
+   supply the monochrome icon in the drawable defined by the android:roundIcon
+   and android:icon attribute.
+
+   For example, if android:roundIcon and android:icon are both in the
+   manifest, a launcher might choose to use android:roundIcon over
+   android:icon to display the adaptive app icon. Therefore, your themed
+   application iconwill not show if your monochrome attribute is not also
+   specified in android:roundIcon.
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:26: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:46: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\java\com\firefighter\robotcontroller\JoystickView.kt:76: Warning: Custom view JoystickView overrides onTouchEvent but not performClick [ClickableViewAccessibility]
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+                 ~~~~~~~~~~~~
+
+   Explanation for issues of type "ClickableViewAccessibility":
+   If a View that overrides onTouchEvent or uses an OnTouchListener does not
+   also implement performClick and call it when clicks are detected, the View
+   may not handle accessibility actions properly. Logic handling the click
+   actions should ideally be placed in View#performClick as some accessibility
+   services invoke performClick when a click action should occur.
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:57: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:94: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:102: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:163: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:176: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:187: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:198: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageButton
+         ~~~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\java\com\firefighter\robotcontroller\MainActivity.kt:206: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            connectionStatusText.text = "CONNECTED"
+                                         ~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\java\com\firefighter\robotcontroller\MainActivity.kt:209: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            connectionStatusText.text = "OFFLINE"
+                                         ~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:24: Warning: Hardcoded string "🚒 FIREFIGHTER ROBOT", should use @string resource [HardcodedText]
+            android:text="🚒 FIREFIGHTER ROBOT"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:37: Warning: Hardcoded string "MANUAL", should use @string resource [HardcodedText]
+            android:text="MANUAL"
+            ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:49: Warning: Hardcoded string "OFFLINE", should use @string resource [HardcodedText]
+            android:text="OFFLINE"
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:129: Warning: Hardcoded string "🔥 EXTINGUISH", should use @string resource [HardcodedText]
+            android:text="🔥 EXTINGUISH"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:139: Warning: Hardcoded string "🚨 SIRENS", should use @string resource [HardcodedText]
+            android:text="🚨 SIRENS"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_main.xml:148: Warning: Hardcoded string "🛡️ STANDBY", should use @string resource [HardcodedText]
+            android:text="🛡️ STANDBY"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:21: Warning: Hardcoded string "Robot IP Address", should use @string resource [HardcodedText]
+        android:text="Robot IP Address"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:30: Warning: Hardcoded string "192.168.4.1", should use @string resource [HardcodedText]
+        android:hint="192.168.4.1"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:35: Warning: Hardcoded string "192.168.4.1", should use @string resource [HardcodedText]
+        android:text="192.168.4.1"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:41: Warning: Hardcoded string "Port Number", should use @string resource [HardcodedText]
+        android:text="Port Number"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:50: Warning: Hardcoded string "80", should use @string resource [HardcodedText]
+        android:hint="80"
+        ~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:55: Warning: Hardcoded string "80", should use @string resource [HardcodedText]
+        android:text="80"
+        ~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:62: Warning: Hardcoded string "SAVE SETTINGS", should use @string resource [HardcodedText]
+        android:text="SAVE SETTINGS"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\Downloads\FirefighterRobotController_v2\FirefighterRobotController_FINAL\app\src\main\res\layout\activity_settings.xml:72: Warning: Hardcoded string "Note: Default ESP32 AP IP is 192.168.4.1. Use Port 80 for basic TCP communication.", should use @string resource [HardcodedText]
+        android:text="Note: Default ESP32 AP IP is 192.168.4.1. Use Port 80 for basic TCP communication."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+0 errors, 69 warnings
