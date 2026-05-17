@@ -1,41 +1,50 @@
 <resources>
     <string name="app_name">Firefighter Robot</string>
     <string name="settings_title">Settings</string>
-    <string name="connected">🟢 Connected</string>
-    <string name="disconnected">🔴 Disconnected</string>
-    <string name="connecting">🟡 Connecting…</string>
+    <string name="connected">● ONLINE</string>
+    <string name="disconnected">● OFFLINE</string>
+    <string name="connecting">● CONNECTING…</string>
 
-    <!-- Joystick labels -->
+    <!-- Control Panel Labels -->
     <string name="label_movement">MOVEMENT</string>
-    <string name="label_movement_hint">Forward · Back · Left · Right</string>
-    <string name="label_nozzle">NOZZLE AIM</string>
-    <string name="label_nozzle_hint">Pan · Tilt · Direction</string>
+    <string name="label_steering">STEERING</string>
     <string name="label_controls">CONTROLS</string>
+    <string name="label_telemetry">TELEMETRY</string>
 
-    <!-- Buttons -->
-    <string name="btn_suppress_fire_off">💧 SUPPRESS\nFIRE</string>
-    <string name="btn_suppress_fire_on">💧 SUPPRESS\nFIRE ✔</string>
-    <string name="btn_lights_off">💡 LIGHTS</string>
-    <string name="btn_lights_on">💡 LIGHTS ✔</string>
-    <string name="btn_horn">📢 HORN\n(HOLD)</string>
-    <string name="btn_estop">⛔ E-STOP</string>
+    <!-- Action Buttons -->
+    <string name="btn_extinguish">EXTINGUISH</string>
+    <string name="btn_extinguish_active">EXTINGUISH ●</string>
+    <string name="btn_siren">SIRENS</string>
+    <string name="btn_siren_active">SIRENS ●</string>
+    <string name="btn_emergency_stop">EMERGENCY STOP</string>
+
+    <!-- Telemetry Labels -->
+    <string name="telemetry_flame">Flame: %s</string>
+    <string name="telemetry_smoke">Smoke: %s</string>
+    <string name="telemetry_temp">Temp: %s°C</string>
+    <string name="telemetry_dist">Dist: %scm</string>
+    <string name="telemetry_fire_score">Fire Score: %s</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
-    <string name="select_device">Select Your ESP32 Device</string>
-    <string name="scan_devices">🔍 Scan for Devices</string>
-    <string name="scanning">Scanning…</string>
-    <string name="no_devices">No devices found. Tap Scan.</string>
-    <string name="save">✔ Save Device</string>
-    <string name="device_saved">Device saved! Returning…</string>
-    <string name="on">ON</string>
-    <string name="off">OFF</string>
+    <string name="connection_settings">CONNECTION</string>
+    <string name="information">INFORMATION</string>
+    <string name="ip_address_hint">Robot IP Address</string>
+    <string name="port_hint">Port Number</string>
+    <string name="save_settings">SAVE SETTINGS</string>
+    <string name="default_ip_info">Default ESP32 AP IP: 192.168.4.1</string>
+    <string name="default_port_info">Default Port: 80 (TCP)</string>
 
     <!-- Mode Switching -->
-    <string name="mode_manual">MODE: MANUAL</string>
-    <string name="mode_auto">MODE: AUTO</string>
+    <string name="mode_manual">MANUAL</string>
+    <string name="mode_auto">AUTO</string>
     <string name="confirm_mode_change_title">Switch Mode</string>
     <string name="confirm_mode_change_message">Are you sure you want to switch to %s mode?</string>
     <string name="confirm_yes">Yes, Switch</string>
     <string name="confirm_no">Cancel</string>
+
+    <!-- Status Messages -->
+    <string name="status_online">● ONLINE</string>
+    <string name="status_offline">● OFFLINE</string>
+    <string name="status_connecting">● CONNECTING…</string>
 </resources>

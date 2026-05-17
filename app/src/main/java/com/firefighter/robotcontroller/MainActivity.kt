@@ -36,10 +36,18 @@ class MainActivity : AppCompatActivity() {
     // Control Buttons (Center Panel)
     private lateinit var extinguishButton: MaterialButton
     private lateinit var sirenButton: MaterialButton
-    private lateinit var standbyButton: MaterialButton
+    private lateinit var estopButton: MaterialButton
+
+    // Telemetry Display
+    private lateinit var telemetryFlame: TextView
+    private lateinit var telemetrySmoke: TextView
+    private lateinit var telemetryTemp: TextView
+    private lateinit var telemetryDist: TextView
+    private lateinit var telemetryFireScore: TextView
 
     private var extinguishActive = false
     private var sirenActive = false
+    private var estopActive = false
     private var isAutoMode = false
     
     private var activeCommand: String = "S"
@@ -63,7 +71,14 @@ class MainActivity : AppCompatActivity() {
         bindViews()
         setupListeners()
         initConnection()
-        
+
+        // Register telemetry listener
+        WifiRobotManager.telemetryListener = { data ->
+            handler.post {
+                updateTelemetryDisplay(data)
+            }
+        }
+
         handler.post(commandRepeater)
     }
 
@@ -80,7 +95,13 @@ class MainActivity : AppCompatActivity() {
 
         extinguishButton     = findViewById(R.id.extinguishButton)
         sirenButton          = findViewById(R.id.sirenButton)
-        standbyButton        = findViewById(R.id.standbyButton)
+        estopButton          = findViewById(R.id.estopButton)
+
+        telemetryFlame       = findViewById(R.id.telemetryFlame)
+        telemetrySmoke       = findViewById(R.id.telemetrySmoke)
+        telemetryTemp        = findViewById(R.id.telemetryTemp)
+        telemetryDist        = findViewById(R.id.telemetryDist)
+        telemetryFireScore   = findViewById(R.id.telemetryFireScore)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -112,22 +133,8 @@ class MainActivity : AppCompatActivity() {
             updateButtonState(sirenButton, sirenActive, "🚨 SIRENS")
         }
 
-        standbyButton.setOnClickListener {
-            if (isAutoMode) return@setOnClickListener
-            // Standby sends a command to reset everything to safe state
-            WifiRobotManager.send("STANDBY")
-            
-            // Reset local UI states
-            extinguishActive = false
-            sirenActive = false
-            updateButtonState(extinguishButton, false, "🔥 EXTINGUISH")
-            updateButtonState(sirenButton, false, "🚨 SIRENS")
-            
-            // Visual feedback for standby press
-            standbyButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green_active)
-            handler.postDelayed({
-                standbyButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.fire_orange)
-            }, 500)
+        estopButton.setOnClickListener {
+            showEStopConfirmation()
         }
     }
 
@@ -141,8 +148,33 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun showEStopConfirmation() {
+        if (estopActive) {
+            // Reset E-Stop
+            estopActive = false
+            estopButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.btn_emergency)
+            estopButton.text = "EMERGENCY STOP"
+        } else {
+            // Trigger E-Stop with confirmation
+            AlertDialog.Builder(this)
+                .setTitle("⚠️ EMERGENCY STOP")
+                .setMessage("Are you sure you want to trigger emergency stop? This will immediately halt all robot operations.")
+                .setPositiveButton("CONFIRM STOP") { _, _ ->
+                    estopActive = true
+                    WifiRobotManager.send("ESTOP")
+                    activeCommand = "S"
+                    // Change button color to green to indicate action taken
+                    estopButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green_active)
+                    estopButton.text = "⛔ ESTOPPED"
+                }
+                .setNegativeButton("CANCEL", null)
+                .show()
+        }
+    }
+
     private fun toggleMode() {
         isAutoMode = !isAutoMode
+        modeToggleButton.iconTint = null // Ensure original vector colors are used
         if (isAutoMode) {
             WifiRobotManager.send("MODE_AUTO")
             modeToggleButton.text = getString(R.string.mode_auto)
@@ -159,7 +191,7 @@ class MainActivity : AppCompatActivity() {
     private fun setAllControlsEnabled(enabled: Boolean) {
         val buttons = arrayOf(
             btnForward, btnBackward, btnTurnLeft, btnTurnRight, 
-            extinguishButton, sirenButton, standbyButton
+            extinguishButton, sirenButton, estopButton
         )
         for (view in buttons) {
             view.alpha = if (enabled) 1.0f else 0.4f
@@ -175,13 +207,23 @@ class MainActivity : AppCompatActivity() {
                 MotionEvent.ACTION_DOWN -> {
                     activeCommand = command
                     WifiRobotManager.send(command) // Instant send on press
+                    view.alpha = 0.7f
+                    view.scaleX = 0.95f
+                    view.scaleY = 0.95f
+                    // Switch to green pressed background
+                    view.setBackgroundResource(R.drawable.bg_direction_button_pressed)
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     activeCommand = "S"
                     WifiRobotManager.send("S") // Instant stop on release
+                    view.alpha = 1.0f
+                    view.scaleX = 1.0f
+                    view.scaleY = 1.0f
+                    // Restore normal background
+                    view.setBackgroundResource(R.drawable.bg_direction_button)
                 }
             }
-            true 
+            true
         }
     }
 
@@ -194,6 +236,7 @@ class MainActivity : AppCompatActivity() {
         handler.post(object : Runnable {
             override fun run() {
                 updateConnectionStatus()
+                requestTelemetry()
                 handler.postDelayed(this, 1500)
             }
         })
@@ -217,5 +260,44 @@ class MainActivity : AppCompatActivity() {
         val port = prefs.getInt("port", 80)
         WifiRobotManager.updateConfig(ip, port)
         WifiRobotManager.connect()
+    }
+
+    private fun requestTelemetry() {
+        if (WifiRobotManager.isConnected()) {
+            WifiRobotManager.send("GET_TELEMETRY")
+        }
+    }
+
+    fun updateTelemetryDisplay(data: String) {
+        try {
+            // Parse format: FL:1234,SM:456,TP:25,DF:30,FS:85.5
+            val values = data.split(",")
+            var flame = "---"
+            var smoke = "---"
+            var temp = "---"
+            var dist = "---"
+            var fireScore = "---"
+
+            for (value in values) {
+                val parts = value.split(":")
+                if (parts.size == 2) {
+                    when (parts[0]) {
+                        "FL" -> flame = parts[1]
+                        "SM" -> smoke = parts[1]
+                        "TP" -> temp = "${parts[1]}°C"
+                        "DF" -> dist = "${parts[1]}cm"
+                        "FS" -> fireScore = parts[1]
+                    }
+                }
+            }
+
+            telemetryFlame.text = "Flame: $flame"
+            telemetrySmoke.text = "Smoke: $smoke"
+            telemetryTemp.text = "Temp: $temp"
+            telemetryDist.text = "Dist: $dist"
+            telemetryFireScore.text = "Fire Score: $fireScore"
+        } catch (e: Exception) {
+            // Keep default values on parse error
+        }
     }
 }

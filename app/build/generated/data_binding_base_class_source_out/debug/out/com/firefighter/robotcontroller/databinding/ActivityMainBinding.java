@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.viewbinding.ViewBinding;
@@ -42,6 +43,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final LinearLayout controlPanel;
 
   @NonNull
+  public final MaterialButton estopButton;
+
+  @NonNull
   public final MaterialButton extinguishButton;
 
   @NonNull
@@ -54,7 +58,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialButton modeToggleButton;
 
   @NonNull
-  public final LinearLayout movementPanel;
+  public final CardView movementPanel;
 
   @NonNull
   public final TextView robotTitle;
@@ -66,23 +70,38 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialButton sirenButton;
 
   @NonNull
-  public final MaterialButton standbyButton;
-
-  @NonNull
   public final ConstraintLayout statusBar;
 
   @NonNull
-  public final ConstraintLayout steeringPanel;
+  public final CardView steeringPanel;
+
+  @NonNull
+  public final TextView telemetryDist;
+
+  @NonNull
+  public final TextView telemetryFireScore;
+
+  @NonNull
+  public final TextView telemetryFlame;
+
+  @NonNull
+  public final TextView telemetrySmoke;
+
+  @NonNull
+  public final TextView telemetryTemp;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull ImageButton btnBackward,
       @NonNull ImageButton btnForward, @NonNull ImageButton btnTurnLeft,
       @NonNull ImageButton btnTurnRight, @NonNull TextView connectionStatusText,
-      @NonNull LinearLayout controlPanel, @NonNull MaterialButton extinguishButton,
-      @NonNull Guideline guideLeft, @NonNull Guideline guideRight,
-      @NonNull MaterialButton modeToggleButton, @NonNull LinearLayout movementPanel,
-      @NonNull TextView robotTitle, @NonNull ImageButton settingsButton,
-      @NonNull MaterialButton sirenButton, @NonNull MaterialButton standbyButton,
-      @NonNull ConstraintLayout statusBar, @NonNull ConstraintLayout steeringPanel) {
+      @NonNull LinearLayout controlPanel, @NonNull MaterialButton estopButton,
+      @NonNull MaterialButton extinguishButton, @NonNull Guideline guideLeft,
+      @NonNull Guideline guideRight, @NonNull MaterialButton modeToggleButton,
+      @NonNull CardView movementPanel, @NonNull TextView robotTitle,
+      @NonNull ImageButton settingsButton, @NonNull MaterialButton sirenButton,
+      @NonNull ConstraintLayout statusBar, @NonNull CardView steeringPanel,
+      @NonNull TextView telemetryDist, @NonNull TextView telemetryFireScore,
+      @NonNull TextView telemetryFlame, @NonNull TextView telemetrySmoke,
+      @NonNull TextView telemetryTemp) {
     this.rootView = rootView;
     this.btnBackward = btnBackward;
     this.btnForward = btnForward;
@@ -90,6 +109,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.btnTurnRight = btnTurnRight;
     this.connectionStatusText = connectionStatusText;
     this.controlPanel = controlPanel;
+    this.estopButton = estopButton;
     this.extinguishButton = extinguishButton;
     this.guideLeft = guideLeft;
     this.guideRight = guideRight;
@@ -98,9 +118,13 @@ public final class ActivityMainBinding implements ViewBinding {
     this.robotTitle = robotTitle;
     this.settingsButton = settingsButton;
     this.sirenButton = sirenButton;
-    this.standbyButton = standbyButton;
     this.statusBar = statusBar;
     this.steeringPanel = steeringPanel;
+    this.telemetryDist = telemetryDist;
+    this.telemetryFireScore = telemetryFireScore;
+    this.telemetryFlame = telemetryFlame;
+    this.telemetrySmoke = telemetrySmoke;
+    this.telemetryTemp = telemetryTemp;
   }
 
   @Override
@@ -166,6 +190,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.estopButton;
+      MaterialButton estopButton = ViewBindings.findChildViewById(rootView, id);
+      if (estopButton == null) {
+        break missingId;
+      }
+
       id = R.id.extinguishButton;
       MaterialButton extinguishButton = ViewBindings.findChildViewById(rootView, id);
       if (extinguishButton == null) {
@@ -191,7 +221,7 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       id = R.id.movementPanel;
-      LinearLayout movementPanel = ViewBindings.findChildViewById(rootView, id);
+      CardView movementPanel = ViewBindings.findChildViewById(rootView, id);
       if (movementPanel == null) {
         break missingId;
       }
@@ -214,12 +244,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.standbyButton;
-      MaterialButton standbyButton = ViewBindings.findChildViewById(rootView, id);
-      if (standbyButton == null) {
-        break missingId;
-      }
-
       id = R.id.statusBar;
       ConstraintLayout statusBar = ViewBindings.findChildViewById(rootView, id);
       if (statusBar == null) {
@@ -227,15 +251,46 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       id = R.id.steeringPanel;
-      ConstraintLayout steeringPanel = ViewBindings.findChildViewById(rootView, id);
+      CardView steeringPanel = ViewBindings.findChildViewById(rootView, id);
       if (steeringPanel == null) {
         break missingId;
       }
 
+      id = R.id.telemetryDist;
+      TextView telemetryDist = ViewBindings.findChildViewById(rootView, id);
+      if (telemetryDist == null) {
+        break missingId;
+      }
+
+      id = R.id.telemetryFireScore;
+      TextView telemetryFireScore = ViewBindings.findChildViewById(rootView, id);
+      if (telemetryFireScore == null) {
+        break missingId;
+      }
+
+      id = R.id.telemetryFlame;
+      TextView telemetryFlame = ViewBindings.findChildViewById(rootView, id);
+      if (telemetryFlame == null) {
+        break missingId;
+      }
+
+      id = R.id.telemetrySmoke;
+      TextView telemetrySmoke = ViewBindings.findChildViewById(rootView, id);
+      if (telemetrySmoke == null) {
+        break missingId;
+      }
+
+      id = R.id.telemetryTemp;
+      TextView telemetryTemp = ViewBindings.findChildViewById(rootView, id);
+      if (telemetryTemp == null) {
+        break missingId;
+      }
+
       return new ActivityMainBinding((ConstraintLayout) rootView, btnBackward, btnForward,
-          btnTurnLeft, btnTurnRight, connectionStatusText, controlPanel, extinguishButton,
-          guideLeft, guideRight, modeToggleButton, movementPanel, robotTitle, settingsButton,
-          sirenButton, standbyButton, statusBar, steeringPanel);
+          btnTurnLeft, btnTurnRight, connectionStatusText, controlPanel, estopButton,
+          extinguishButton, guideLeft, guideRight, modeToggleButton, movementPanel, robotTitle,
+          settingsButton, sirenButton, statusBar, steeringPanel, telemetryDist, telemetryFireScore,
+          telemetryFlame, telemetrySmoke, telemetryTemp);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

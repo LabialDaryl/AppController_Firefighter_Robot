@@ -1,46 +1,106 @@
 [
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_direction_button_pressed.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_direction_button_pressed.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_toggle_manual.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_toggle_manual.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_direction_button.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_direction_button.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_extinguisher.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_extinguisher.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/layout_activity_settings.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_telemetry_card.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_telemetry_card.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_settings.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_control_button.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_control_button.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_siren.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_siren.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_toggle_auto.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_toggle_auto.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_card.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_card.xml"
     },
     {
         "merged": "com.firefighter.robotcontroller.app-merged_res-34:/layout_activity_main.xml.flat",
         "source": "com.firefighter.robotcontroller.app-main-36:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\activity_main.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_btn_arrow_selector.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/btn_arrow_selector.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_toggle_auto.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_toggle_auto.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_arrow_right.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_arrow_right.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_arrow_left.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_arrow_left.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_btn_arrow_selector.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\btn_arrow_selector.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_arrow_up.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_arrow_up.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_status_bar.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_status_bar.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\layout_item_ble_device.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\item_ble_device.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/layout_item_ble_device.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/layout/item_ble_device.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\drawable_ic_toggle_manual.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\drawable\\ic_toggle_manual.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_emergency_stop.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_emergency_stop.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-merged_res-34:\\layout_activity_settings.xml.flat",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\activity_settings.xml"
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_emergency_button.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_emergency_button.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_bg_control_button_pressed.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/bg_control_button_pressed.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/drawable_ic_arrow_down.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/drawable/ic_arrow_down.xml"
+    },
+    {
+        "merged": "com.firefighter.robotcontroller.app-merged_res-34:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.firefighter.robotcontroller.app-main-36:/mipmap-anydpi-v26/ic_launcher.xml"
     }
 ]

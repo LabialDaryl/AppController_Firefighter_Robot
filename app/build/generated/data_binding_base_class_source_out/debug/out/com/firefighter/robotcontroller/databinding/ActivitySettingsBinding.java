@@ -4,33 +4,34 @@ package com.firefighter.robotcontroller.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.firefighter.robotcontroller.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivitySettingsBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
-  public final EditText ipEditText;
+  public final TextInputEditText ipEditText;
 
   @NonNull
-  public final EditText portEditText;
+  public final TextInputEditText portEditText;
 
   @NonNull
   public final MaterialButton saveButton;
 
-  private ActivitySettingsBinding(@NonNull LinearLayout rootView, @NonNull EditText ipEditText,
-      @NonNull EditText portEditText, @NonNull MaterialButton saveButton) {
+  private ActivitySettingsBinding(@NonNull ScrollView rootView,
+      @NonNull TextInputEditText ipEditText, @NonNull TextInputEditText portEditText,
+      @NonNull MaterialButton saveButton) {
     this.rootView = rootView;
     this.ipEditText = ipEditText;
     this.portEditText = portEditText;
@@ -39,7 +40,7 @@ public final class ActivitySettingsBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -65,13 +66,13 @@ public final class ActivitySettingsBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.ipEditText;
-      EditText ipEditText = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText ipEditText = ViewBindings.findChildViewById(rootView, id);
       if (ipEditText == null) {
         break missingId;
       }
 
       id = R.id.portEditText;
-      EditText portEditText = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText portEditText = ViewBindings.findChildViewById(rootView, id);
       if (portEditText == null) {
         break missingId;
       }
@@ -82,7 +83,7 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivitySettingsBinding((LinearLayout) rootView, ipEditText, portEditText,
+      return new ActivitySettingsBinding((ScrollView) rootView, ipEditText, portEditText,
           saveButton);
     }
     String missingId = rootView.getResources().getResourceName(id);

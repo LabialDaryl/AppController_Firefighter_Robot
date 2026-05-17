@@ -5,16 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_background"
+    android:background="@color/md_theme_background"
     tools:context=".MainActivity">
 
+    <!-- Status Bar with Gradient -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/statusBar"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:background="@color/fire_red_dark"
+        android:layout_height="64dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/bg_status_bar"
+        android:elevation="8dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -23,8 +25,9 @@
             android:layout_height="wrap_content"
             android:text="🚒 FIREFIGHTER ROBOT"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:letterSpacing="0.05"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -33,10 +36,16 @@
             android:id="@+id/modeToggleButton"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:paddingHorizontal="16dp"
             android:text="MANUAL"
             android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
             app:icon="@drawable/ic_toggle_manual"
+            app:iconSize="40dp"
+            app:iconTint="@null"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,20 +55,25 @@
             android:id="@+id/connectionStatusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OFFLINE"
-            android:textColor="@color/black"
+            android:text="● OFFLINE"
+            android:textColor="@color/status_offline"
+            android:textSize="12sp"
             android:textStyle="bold"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/bg_card"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/settingsButton"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="12dp"/>
 
         <ImageButton
             android:id="@+id/settingsButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@android:drawable/ic_menu_preferences"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_settings"
             android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -70,120 +84,294 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideRight"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
+        app:layout_constraintGuide_percent="0.65" />
 
-    <!-- LEFT: Drive -->
-    <LinearLayout
+    <!-- LEFT: Movement Panel -->
+    <androidx.cardview.widget.CardView
         android:id="@+id/movementPanel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/surface_card"
         app:layout_constraintTop_toBottomOf="@id/statusBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideLeft">
 
-        <ImageButton
-            android:id="@+id/btnForward"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@android:drawable/arrow_up_float"
-            android:background="@drawable/btn_arrow_selector"
-            android:layout_marginBottom="24dp" />
-
-        <ImageButton
-            android:id="@+id/btnBackward"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@android:drawable/arrow_down_float"
-            android:background="@drawable/btn_arrow_selector" />
-    </LinearLayout>
-
-    <!-- CENTER: Main Controls -->
-    <LinearLayout
-        android:id="@+id/controlPanel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/statusBar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideLeft"
-        app:layout_constraintEnd_toStartOf="@id/guideRight">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/extinguishButton"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="12dp"
-            android:text="🔥 EXTINGUISH"
-            app:cornerRadius="12dp"
-            app:backgroundTint="@color/fire_red_dark" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/sirenButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="12dp"
-            android:text="🚨 SIRENS"
-            app:cornerRadius="12dp"
-            app:backgroundTint="@color/red_inactive" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:letterSpacing="0.1"
+                android:text="MOVEMENT"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/standbyButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="🛡️ STANDBY"
-            app:cornerRadius="12dp"
-            app:backgroundTint="@color/fire_orange" />
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/btnForward"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_direction_button"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_arrow_up" />
 
-    <!-- RIGHT: Steering (Left/Right arrows only) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageButton
+                android:id="@+id/btnBackward"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:background="@drawable/bg_direction_button"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_arrow_down" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- RIGHT: Steering Panel -->
+    <androidx.cardview.widget.CardView
         android:id="@+id/steeringPanel"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/surface_card"
         app:layout_constraintTop_toBottomOf="@id/statusBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideRight"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageButton
-            android:id="@+id/btnTurnLeft"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:background="@drawable/btn_arrow_selector"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnTurnRight"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:layout_marginEnd="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
 
-        <ImageButton
-            android:id="@+id/btnTurnRight"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@android:drawable/ic_media_next"
-            android:background="@drawable/btn_arrow_selector"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnTurnLeft"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:letterSpacing="0.1"
+                android:text="STEERING"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/btnTurnLeft"
+                    android:layout_width="84dp"
+                    android:layout_height="84dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_direction_button"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_arrow_left" />
+
+                <ImageButton
+                    android:id="@+id/btnTurnRight"
+                    android:layout_width="84dp"
+                    android:layout_height="84dp"
+                    android:background="@drawable/bg_direction_button"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_arrow_right" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- CENTER: Control Panel -->
+    <LinearLayout
+        android:id="@+id/controlPanel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideRight"
+        app:layout_constraintStart_toEndOf="@id/guideLeft"
+        app:layout_constraintTop_toBottomOf="@id/statusBar">
+
+
+        <!-- Telemetry Display Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="3.5"
+            android:minHeight="200dp"
+            app:cardBackgroundColor="@color/telemetry_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:letterSpacing="0.1"
+                    android:text="📊 TELEMETRY"
+                    android:textColor="@color/telemetry_label"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/telemetryFlame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="Flame: ---"
+                    android:textColor="@color/telemetry_value"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/telemetrySmoke"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="Smoke: ---"
+                    android:textColor="@color/telemetry_value"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/telemetryTemp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="Temp: ---°C"
+                    android:textColor="@color/telemetry_value"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/telemetryDist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="Dist: ---cm"
+                    android:textColor="@color/telemetry_value"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/telemetryFireScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="Fire Score: ---"
+                    android:textColor="@color/telemetry_value"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- buttons -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/extinguishButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="EXTINGUISH"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/btn_normal"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_extinguisher"
+            app:iconGravity="start"
+            app:iconPadding="12dp"
+            app:iconSize="22dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sirenButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="SIRENS"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/red_inactive"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_siren"
+            app:iconGravity="start"
+            app:iconPadding="12dp"
+            app:iconSize="22dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/estopButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="EMERGENCY STOP"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/btn_emergency"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_emergency_stop"
+            app:iconGravity="start"
+            app:iconPadding="12dp"
+            app:iconSize="22dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

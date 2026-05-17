@@ -1,18 +1,14 @@
 [
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-mergeDebugResources-33:\\layout\\item_ble_device.xml",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\item_ble_device.xml"
-    },
-    {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-mergeDebugResources-33:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\activity_main.xml"
+        "merged": "com.firefighter.robotcontroller.app-mergeDebugResources-33:/layout/item_ble_device.xml",
+        "source": "com.firefighter.robotcontroller.app-main-36:/layout/item_ble_device.xml"
     },
     {
         "merged": "com.firefighter.robotcontroller.app-mergeDebugResources-33:/layout/activity_main.xml",
         "source": "com.firefighter.robotcontroller.app-main-36:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-mergeDebugResources-33:\\layout\\activity_settings.xml",
-        "source": "C:\\Users\\User\\.gradle\\daemon\\8.6\\com.firefighter.robotcontroller.app-main-36:\\layout\\activity_settings.xml"
+        "merged": "com.firefighter.robotcontroller.app-mergeDebugResources-33:/layout/activity_settings.xml",
+        "source": "com.firefighter.robotcontroller.app-main-36:/layout/activity_settings.xml"
     }
 ]

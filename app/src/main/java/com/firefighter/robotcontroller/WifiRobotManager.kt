@@ -22,13 +22,16 @@ object WifiRobotManager {
     private var targetIp = "192.168.4.1"
     private var targetPort = 80
     private var cachedAddress: InetAddress? = null
-    
+
     @Volatile
     private var lastPongReceived = 0L
     private const val TIMEOUT_MS = 3000L
-    
+
     private var receiverThread: Thread? = null
     private var heartbeatTask: Future<*>? = null
+
+    // Callback for telemetry data
+    var telemetryListener: ((String) -> Unit)? = null
 
     @Synchronized
     fun updateConfig(ip: String, port: Int) {
@@ -81,6 +84,8 @@ object WifiRobotManager {
                             // Log.v(TAG, "Heartbeat: PONG received")
                         } else {
                             Log.d(TAG, "Robot Response: $message")
+                            // Forward telemetry data to listener
+                            telemetryListener?.invoke(message)
                         }
                     } catch (e: SocketTimeoutException) {
                         // Normal behavior for non-blocking receive
